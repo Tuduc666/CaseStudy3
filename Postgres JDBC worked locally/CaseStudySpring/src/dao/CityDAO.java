@@ -12,34 +12,34 @@ import models.City;
 import utils.OracleQueries;
 
 public class CityDAO {
-	
-	public List<City> getCityList() throws IOException, SQLException 	{
+
+	public List<City> getCityList() throws IOException, SQLException {
 		City city = null;
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet result = null;
 		List<City> l = new ArrayList<City>();
-		
-			conn = GetConnection.Connect();
-			stmt = conn.prepareStatement(OracleQueries.GETALLCITIES);		
-			result = stmt.executeQuery();
-			while(result.next()) {
-				city = new City();
-				city.setName(result.getString(1));
-				l.add(city);
-			}
-			
-			if(result != null) {
-				result.close();
-			}
-			if(stmt != null) {
-				stmt.close();
-			}
-			if(conn != null) {
-				conn.close();
-			}
-			
+
+		conn = GetConnection.Connect();
+		stmt = conn.prepareStatement(OracleQueries.GETALLCITIES);
+		result = stmt.executeQuery();
+		while (result.next()) {
+			city = new City();
+			city.setName(result.getString(1));
+			l.add(city);
+		}
+
+		if (result != null) {
+			result.close();
+		}
+		if (stmt != null) {
+			stmt.close();
+		}
+		if (conn != null) {
+			conn.close();
+		}
+
 		return l;
 	}
-	
+
 }

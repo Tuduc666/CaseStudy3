@@ -10,6 +10,8 @@ public class GetConnection {
 //		String dbUrl = System.getenv("JDBC_DATABASE_URL");
 //		return DriverManager.getConnection(dbUrl);
 //	}
+	
+// Postgres JDBC local connection - worked!!!!!
     private final static String url = "jdbc:postgresql://localhost/dvdrental";
     private final static String user = "postgres";
     private final static String password = "Tamduc1166";
