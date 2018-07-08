@@ -5,8 +5,7 @@ public class Salesperson {
 	private String name;
 	private String phone;
 	private String email; 
-	private Float comm;
-	
+	private Double comm;
 	public int getId() {
 		return id;
 	}
@@ -31,10 +30,12 @@ public class Salesperson {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public Float getComm() {
+	public Double getComm() {
 		return comm;
 	}
-	public void setComm(Float comm) {
+	public void setComm(Double comm) {
 		this.comm = comm;
-	} 
+	}
+	
+	
 }

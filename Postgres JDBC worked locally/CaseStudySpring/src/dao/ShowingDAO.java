@@ -11,123 +11,103 @@ import utils.OracleQueries;
 
 public class ShowingDAO {
 
-	public Showing getShowing(String user_id, String property_id) throws IOException, SQLException 	{
+	public Showing getShowing(Integer  user_id, Integer  property_id) throws IOException, SQLException {
 		Showing showing = null;
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet result = null;
-		
-		try {
-			conn = OracleConnection.getConnection();
-			stmt = conn.prepareStatement(OracleQueries.GETSHOWING);
-			stmt.setString(1, user_id);
-			stmt.setString(2, property_id);
-			result = stmt.executeQuery();
-			if(result.next()) {
-				showing = new Showing();
-				showing.setUser_id(result.getInt(1));
-				showing.setProperty_id(result.getInt(2));
-				showing.setUser_message(result.getString(3));					
-			}
-			
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
 
-			if(result != null) {
-				result.close();
-			}
-			if(stmt != null) {
-				stmt.close();
-			}
-			if(conn != null) {
-				conn.close();
-			}
+		conn = GetConnection.Connect();
+		stmt = conn.prepareStatement(OracleQueries.GETSHOWING);
+		stmt.setInt(1, user_id);
+		stmt.setInt(2, property_id);
+		result = stmt.executeQuery();
+		if (result.next()) {
+			showing = new Showing();
+			showing.setUser_id(result.getInt(1));
+			showing.setProperty_id(result.getInt(2));
+			showing.setUser_message(result.getString(3));
 		}
-		
+
+		if (result != null) {
+			result.close();
+		}
+		if (stmt != null) {
+			stmt.close();
+		}
+		if (conn != null) {
+			conn.close();
+		}
+
 		return showing;
 	}
-	
-	public Boolean addShowing(String user_id, String property_id, String user_message) throws IOException, SQLException {
+
+	public Boolean addShowing(Integer  user_id, Integer  property_id, String user_message)
+			throws IOException, SQLException {
 		Connection conn = null;
 		PreparedStatement stmt = null;
-		Integer result = null;          
-		
-		try {
-			conn = OracleConnection.getConnection();
-			stmt = conn.prepareStatement(OracleQueries.ADDSHOWING);    
-			stmt.setString(1, user_id);
-			stmt.setString(2, property_id);
-			stmt.setString(3, user_message);
-			result = stmt.executeUpdate();					
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			if(stmt != null) {
-				stmt.close();
-			}
-			if(conn != null) {
-				conn.close();
-			}
+		Integer result = null;
+
+		conn = GetConnection.Connect();
+		stmt = conn.prepareStatement(OracleQueries.ADDSHOWING);
+		stmt.setInt(1, user_id);
+		stmt.setInt(2, property_id);
+		stmt.setString(3, user_message);
+		result = stmt.executeUpdate();
+
+		if (stmt != null) {
+			stmt.close();
 		}
-		return result>0;                    
+		if (conn != null) {
+			conn.close();
+		}
+
+		return result > 0;
 	}
 
-	public Boolean updateShowing(String user_id, String property_id, String user_message) throws IOException, SQLException {
+	public Boolean updateShowing(Integer  user_id, Integer  property_id, String user_message)
+			throws IOException, SQLException {
 		Connection conn = null;
 		PreparedStatement stmt = null;
-		Integer result = null;           
-		
-		try {
-			conn = OracleConnection.getConnection();
-			stmt = conn.prepareStatement(OracleQueries.UPDATESHOWING);    
-			stmt.setString(1, user_id);
-			stmt.setString(2, property_id);
-			stmt.setString(3, user_message);
-			stmt.setString(4, user_id);
-			stmt.setString(5, property_id);         
-			result = stmt.executeUpdate();
-						
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			if(stmt != null) {
-				stmt.close();
-			}
-			if(conn != null) {
-				conn.close();
-			}
+		Integer result = null;
+
+		conn = GetConnection.Connect();
+		stmt = conn.prepareStatement(OracleQueries.UPDATESHOWING);
+		stmt.setInt(1, user_id);
+		stmt.setInt(2, property_id);
+		stmt.setString(3, user_message);
+		stmt.setInt(4, user_id);
+		stmt.setInt(5, property_id);
+		result = stmt.executeUpdate();
+
+		if (stmt != null) {
+			stmt.close();
 		}
-		return result > 0;                    
+		if (conn != null) {
+			conn.close();
+		}
+
+		return result > 0;
 	}
 
-
-	public boolean deleteShowing(String user_id, String property_id) throws IOException, SQLException {
+	public boolean deleteShowing(Integer user_id, Integer property_id) throws IOException, SQLException {
 		Connection conn = null;
 		PreparedStatement stmt = null;
-		Integer result = null;           
-		
-		try {
-			conn = OracleConnection.getConnection();
-			stmt = conn.prepareStatement(OracleQueries.DELETESHOWING);    
-			stmt.setString(1, user_id);
-			stmt.setString(2, property_id);         
-			result = stmt.executeUpdate();
-						
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			if(stmt != null) {
-				stmt.close();
-			}
-			if(conn != null) {
-				conn.close();
-			}
+		Integer result = null;
+
+		conn = GetConnection.Connect();
+		stmt = conn.prepareStatement(OracleQueries.DELETESHOWING);
+		stmt.setInt(1, user_id);
+		stmt.setInt(2, property_id);
+		result = stmt.executeUpdate();
+
+		if (stmt != null) {
+			stmt.close();
 		}
-		return result > 0;                    
+		if (conn != null) {
+			conn.close();
+		}
+
+		return result > 0;
 	}
 }

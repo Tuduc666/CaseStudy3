@@ -35,12 +35,12 @@ public class PropertyDAOTest {
 		assertEquals(expectedAddr1, p.getAddress1());
 	}
 
-//	@Test
-//	public void t2_testGetPropertyList() throws IOException, SQLException {
-//		List<Property> l = new ArrayList<Property>();
-//		
-//		l = pDAO.getPropertyList("all", "all", "date", true);		
-//		assertEquals("888 125th St", l.get(0).getAddress1());
+	@Test
+	public void t2_testGetPropertyList() throws IOException, SQLException {
+		List<Property> l = new ArrayList<Property>();
+		
+		l = pDAO.getPropertyList("all", "all", "date", true);		
+		assertEquals("6886 Broadway", l.get(0).getAddress1());
 //		assertEquals("866 28th Street", l.get(1).getAddress1());
 //		
 //		l = pDAO.getPropertyList("Sunnyside", "all", "date", true);		
@@ -79,7 +79,7 @@ public class PropertyDAOTest {
 //		
 //		l = pDAO.getPropertyList("all", "TX", "price", false);		
 //		assertEquals("1080 Grand Ave", l.get(0).getAddress1());
-//	}
+	}
 	
 	@Test
 	public void t3_testAddProperty() throws IOException, SQLException, ParseException {

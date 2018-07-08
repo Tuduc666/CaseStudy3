@@ -19,9 +19,10 @@ public class GetConnection {
     public static Connection Connect() {
         Connection conn = null;
         try {
+        	Class.forName("org.postgresql.Driver");
             conn = DriverManager.getConnection(url, user, password);
             System.out.println("Connected to the PostgreSQL server successfully.");
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             System.out.println(e.getMessage());
         }
  
